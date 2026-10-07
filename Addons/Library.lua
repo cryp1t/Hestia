@@ -3307,9 +3307,11 @@ function Library:CreateWindow(...)
     else
         Config.Title = Arguments[1]
         Config.AutoShow = Arguments[2] or false;
+        Config.Build = Arguments[3]
     end
 
     if type(Config.Title) ~= 'string' then Config.Title = 'No title' end
+    if type(Config.Build) ~= 'string' then Config.Build = nil end
     if type(Config.TabPadding) ~= 'number' then Config.TabPadding = 0 end
     if type(Config.MenuFadeTime) ~= 'number' then Config.MenuFadeTime = 0.2 end
 
@@ -3373,29 +3375,19 @@ function Library:CreateWindow(...)
         ZIndex = 1;
         Parent = Inner;
     });
-    local MapNameLabel = Library:CreateLabel({
+    local BuildLabel = Library:CreateLabel({
         AnchorPoint = Vector2.new(1, 0),
         Position = UDim2.new(1, -7, 0, 0),
         Size = UDim2.new(0, 0, 0, 25),
-        Text = 'Loading...',
+        Text = Config.Build or '',
         TextColor3 = Library.AccentColor,
         TextXAlignment = Enum.TextXAlignment.Right,
         ZIndex = 1,
         Parent = Inner;
     });
-    Library:AddToRegistry(MapNameLabel, {
+    Library:AddToRegistry(BuildLabel, {
         TextColor3 = 'AccentColor';
     });
-    task.spawn(function()
-        local success, info = pcall(function()
-            return game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
-        end)
-        if success and info and info.Name then
-            MapNameLabel.Text = info.Name
-        else
-            MapNameLabel.Text = game.Name or "Unknown Map"
-        end
-    end)
 
 
     local TabBarOuter = Library:Create('Frame', {
@@ -3606,6 +3598,10 @@ function Library:CreateWindow(...)
 
     function Window:SetWindowTitle(Title)
         WindowLabel.Text = Title;
+    end;
+    function Window:SetBuild(Build)
+        if type(Build) ~= 'string' then Build = '' end
+        BuildLabel.Text = Build;
     end;
     function Window:AddTab(Name)
         local Tab = {
