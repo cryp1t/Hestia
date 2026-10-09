@@ -138,16 +138,16 @@ end
 -- e.g. Library:AddBlurSlider(MyGroupbox)
 function Library:AddBlurSlider(Groupbox)
     Groupbox:AddToggle('LinoriaUseBlur', {
-        Text    = 'Background Blur';
+        Text    = 'background blur';
         Default = Library.UseBlur;
-        Tooltip = 'Blur the background when the menu is open';
+        Tooltip = 'blur the background when the menu is open';
         Callback = function(Value)
             Library.UseBlur = Value;
             Library:UpdateBlur();
         end;
     });
     Groupbox:AddSlider('LinoriaBlurSize', {
-        Text     = 'Blur Amount';
+        Text     = 'blur amount';
         Default  = Library.BlurSize;
         Min      = 0;
         Max      = 56;
@@ -162,16 +162,16 @@ end
 -- e.g. Library:AddDarkenSlider(MyGroupbox)
 function Library:AddDarkenSlider(Groupbox)
     Groupbox:AddToggle('LinoriaUseDarken', {
-        Text    = 'Background Darken';
+        Text    = 'background darken';
         Default = Library.UseDarken;
-        Tooltip = 'Darken the background when the menu is open';
+        Tooltip = 'darken the background when the menu is open';
         Callback = function(Value)
             Library.UseDarken = Value;
             Library:UpdateBlur();
         end;
     });
     Groupbox:AddSlider('LinoriaDarkenAmount', {
-        Text     = 'Darken Amount';
+        Text     = 'darken amount';
         Default  = Library.DarkenAmount;
         Min      = 0;
         Max      = 100;
@@ -208,7 +208,7 @@ end
 -- e.g. Library:AddKeybindTransparencySlider(MyGroupbox)
 function Library:AddKeybindTransparencySlider(Groupbox)
     Groupbox:AddSlider('LinoriaKeybindTransparency', {
-        Text     = 'Keybind Transparency';
+        Text     = 'keybind transparency';
         Default  = 0;
         Min      = 0;
         Max      = 100;
